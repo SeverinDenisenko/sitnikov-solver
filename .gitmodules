@@ -1,0 +1,6 @@
+[submodule "submodules/celestial-mechanic-solvers"]
+	path = submodules/celestial-mechanic-solvers
+	url = https://github.com/SeverinDenisenko/celestial-mechanic-solvers.git
+[submodule "submodules/yaml-cpp"]
+	path = submodules/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
