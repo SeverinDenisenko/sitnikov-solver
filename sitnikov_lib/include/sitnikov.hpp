@@ -6,7 +6,6 @@ namespace si {
 
 struct sitnikov_params_t {
     odes::real_t eccentricity;
-    odes::real_t major_axis;
     odes::real_t z_start;
     odes::real_t z_dot_start;
     odes::real_t periods;
@@ -15,13 +14,14 @@ struct sitnikov_params_t {
 };
 
 struct sitnikov_solution {
+    odes::real_t t;
     odes::real_t z;
     odes::real_t z_dot;
 };
 
-class sitnikov {
+class sitnikov_solver {
 public:
-    sitnikov(sitnikov_params_t params);
+    sitnikov_solver(sitnikov_params_t params);
 
     void step();
     bool solved() const;

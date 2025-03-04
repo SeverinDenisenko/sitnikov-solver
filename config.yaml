@@ -3,13 +3,11 @@ poincare_portrait:
   z_max: 6.0
   z_step: 0.1
   eccentricity: 0.2
-  major_axis: 1.0
   periods: 100.0
 initial_values:
   z_start: 1.0
   z_dot_start: 0.0
   eccentricity: 0.2
-  major_axis: 1.0
   periods: 100.0
 solver_params:
   time_delta: 0.1
