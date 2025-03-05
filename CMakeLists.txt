@@ -13,8 +13,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 
-add_compile_definitions("-DSNUMLIB_USE_MPFR=1")
-
 option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
 
 if(ENABLE_ASAN)
