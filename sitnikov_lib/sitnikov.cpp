@@ -61,6 +61,7 @@ sitnikov_solver::sitnikov_solver(sitnikov_params_t params)
 
     odes::adams_iterative_predictor_corrector_solver_params_t solver_params {
         .order                      = order,
+        .iterations                 = 3,
         .interpolation_coefficients = std::move(interpolation_coefficients),
         .extrapolation_coefficients = std::move(extrapolation_coefficients),
         .initial_solver             = std::make_unique<odes::rk4_solver>(ode_params, odes::rk4_solver_params_t {})
