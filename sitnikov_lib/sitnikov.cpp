@@ -23,7 +23,7 @@ sitnikov_solver::sitnikov_solver(sitnikov_params_t params)
         while (true) {
             E = t + e * sin(E0);
 
-            if (abs(E - E0) <= 1e-20) {
+            if (abs(E - E0) <= 1e-10) {
                 break;
             }
 
