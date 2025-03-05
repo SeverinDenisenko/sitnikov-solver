@@ -12,14 +12,37 @@ namespace si {
 sitnikov_solver::sitnikov_solver(sitnikov_params_t params)
     : params_(params)
 {
-    odes::ode_t ode = [e = params_.eccentricity]([[maybe_unused]] odes::real_t t, odes::vector_t x) {
-        odes::real_t z  = x[0];
-        odes::real_t v  = x[1];
-        odes::real_t r  = 0.5 * (1 - e * cos(t * 2 * mpfr::const_pi()));
-        odes::real_t dz = 2 * r * v;
-        odes::real_t dv = -2 * r * z / pow((r * r + z * z), (3 / 2));
-        return odes::make_vector({ dz, dv });
+    std::function<odes::real_t(odes::real_t)> solve_kepler_equation = [e = params_.eccentricity](odes::real_t t) {
+        odes::real_t E0 = t;
+        odes::real_t E;
+
+        if (t == 0.0) {
+            return odes::real_t(0.0);
+        }
+
+        while (true) {
+            E = t + e * sin(E0);
+
+            if (abs(E - E0) <= 1e-20) {
+                break;
+            }
+
+            E0 = E;
+        }
+
+        return E;
     };
+
+    odes::ode_t ode
+        = [e = params_.eccentricity, solve_kepler_equation]([[maybe_unused]] odes::real_t t, odes::vector_t x) {
+              odes::real_t z  = x[0];
+              odes::real_t v  = x[1];
+              odes::real_t E  = solve_kepler_equation(t);
+              odes::real_t r  = (1.0 - e * cos(E)) / 2.0;
+              odes::real_t dz = v;
+              odes::real_t dv = -z / pow((r * r + z * z), (3.0 / 2.0));
+              return odes::make_vector({ dz, dv });
+          };
 
     odes::ode_params_t ode_params { .t0  = 0.0,
                                     .t1  = params_.periods * 2 * mpfr::const_pi(),
@@ -27,7 +50,7 @@ sitnikov_solver::sitnikov_solver(sitnikov_params_t params)
                                     .x0  = odes::make_vector({ params_.z_start, params_.z_dot_start }),
                                     .ode = ode };
 
-    odes::integer_t order = 3;
+    odes::integer_t order = 4;
     odes::boole_integrator_params_t integrator_params { .order = 1'000 };
 
     odes::adams_interpolation_coefficients interpolation_coefficients(odes::adams_interpolation_coefficients_params_t {

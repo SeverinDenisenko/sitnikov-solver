@@ -10,7 +10,7 @@ int main()
     try {
         YAML::Node config = YAML::LoadFile("config.yaml");
 
-        odes::set_precision(50);
+        odes::set_precision(25);
 
         si::sitnikov_params_t params;
         params.eccentricity = config["initial_values"]["eccentricity"].as<float>();
@@ -20,14 +20,20 @@ int main()
 
         params.time_delta = config["solver_params"]["time_delta"].as<float>();
 
+        odes::integer_t skip_n_outs = config["solver_params"]["skip_n_outs"].as<odes::integer_t>();
+
         si::sitnikov_solver solver(params);
 
         si::sitnikov_solution sol = solver.current();
         std::cout << std::fixed << std::setprecision(10) << sol.t << " " << sol.z << " " << sol.z_dot << '\n';
+        odes::integer_t counter = 0;
         while (!solver.solved()) {
             solver.step();
-            si::sitnikov_solution sol = solver.current();
-            std::cout << std::fixed << std::setprecision(10) << sol.t << " " << sol.z << " " << sol.z_dot << '\n';
+            ++counter;
+            if (counter % skip_n_outs == 0) {
+                si::sitnikov_solution sol = solver.current();
+                std::cout << std::fixed << std::setprecision(10) << sol.t << " " << sol.z << " " << sol.z_dot << '\n';
+            }
         }
 
         return 0;
