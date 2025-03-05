@@ -21,6 +21,8 @@ if(ENABLE_ASAN)
 endif()
 
 add_subdirectory(submodules/celestial-mechanic-solvers)
+
+set(YAML_CPP_BUILD_TOOLS OFF)
 add_subdirectory(submodules/yaml-cpp)
 
 add_subdirectory(sitnikov_lib)

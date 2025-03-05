@@ -45,7 +45,7 @@ sitnikov_solver::sitnikov_solver(sitnikov_params_t params)
           };
 
     odes::ode_params_t ode_params { .t0  = 0.0,
-                                    .t1  = params_.periods * 2 * mpfr::const_pi(),
+                                    .t1  = params_.periods * 2 * M_PI,
                                     .dt  = params_.time_delta,
                                     .x0  = odes::make_vector({ params_.z_start, params_.z_dot_start }),
                                     .ode = ode };
