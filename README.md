@@ -1,6 +1,10 @@
 # sitnikov-solver
 Sitnikov problem solver for elliptical orbits
 
+![example 1](e0dot02.png "Example 1")
+
+![example 2](e0dot2.png "Example 2")
+
 ## Get and build
 
 ```

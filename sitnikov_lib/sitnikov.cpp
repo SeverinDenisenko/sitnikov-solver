@@ -2,9 +2,6 @@
 
 #include "adams_iterative_predictor_corrector_solver.hpp"
 #include "boole_intergrator.hpp"
-#include "full_pivot_gauss_solver.hpp"
-#include "jacoby_matrix_evaluators.hpp"
-#include "newton_root_finder.hpp"
 #include "rk4_solver.hpp"
 
 namespace si {
