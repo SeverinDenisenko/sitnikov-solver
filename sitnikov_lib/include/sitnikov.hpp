@@ -1,6 +1,7 @@
 #pragma once
 
 #include "solver_interface.hpp"
+#include <limits>
 
 namespace si {
 
@@ -11,6 +12,12 @@ struct sitnikov_params_t {
     odes::real_t periods;
 
     odes::real_t time_delta;
+
+    // conditions to break out of integration loop
+    odes::real_t z_min     = -std::numeric_limits<odes::real_t>::infinity();
+    odes::real_t z_max     = std::numeric_limits<odes::real_t>::infinity();
+    odes::real_t z_dot_min = -std::numeric_limits<odes::real_t>::infinity();
+    odes::real_t z_dot_max = std::numeric_limits<odes::real_t>::infinity();
 };
 
 struct sitnikov_solution {

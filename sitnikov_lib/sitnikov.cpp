@@ -74,7 +74,10 @@ void sitnikov_solver::step()
 
 bool sitnikov_solver::solved() const
 {
-    return !(solver_->current_time() < solver_->end_time());
+    auto current   = solver_->current();
+    bool in_bounds = current[0] > params_.z_min && current[0] < params_.z_max && current[1] > params_.z_dot_min
+        && current[1] < params_.z_dot_max;
+    return !(solver_->current_time() < solver_->end_time()) || !in_bounds;
 }
 
 sitnikov_solution sitnikov_solver::current() const
