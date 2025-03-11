@@ -4,14 +4,14 @@ poincare_portrait:
   z_step: 0.1
   z_dot_min: -2.0
   z_dot_max: 2.0
-  z_dot_step: 0.1
+  z_dot_step: 2.0
   eccentricity: 0.1
-  periods: 1000.0
+  periods: 300.0
 initial_values:
   z_start: 1.0
   z_dot_start: 0
   eccentricity: 0.1
   periods: 100.0
 solver_params:
-  time_delta: 0.0001
+  time_delta: 0.001
   skip_n_outs: 10
