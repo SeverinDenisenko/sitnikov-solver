@@ -5,6 +5,8 @@ Sitnikov problem solver for elliptical orbits
 
 ## Get and build
 
+Install boost (https://www.boost.org)
+
 ```
 git clone --recurse-submodules https://github.com/SeverinDenisenko/sitnikov-solver.git
 cd sitnikov-solver
